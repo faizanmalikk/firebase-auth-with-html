@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    email <input type="email" id="email"> <br> <br>
+    password <input type="password" id="pass">
+   <button id="btn"> sign up</button> <br> <br> <br> 
+
+    email <input type="email" id="email-login"> <br> <br>
+    password <input type="password" id="pass-login">
+   <button id="btn1"> login</button>
+
+   
+    
+
+
+
+    <!-- firebase -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAz9pHeuo3WMS_DELcxxLpT8UQZ0Y-zrl0",
+          authDomain: "practice-f6c7a.firebaseapp.com",
+          databaseURL: "https://practice-f6c7a-default-rtdb.firebaseio.com",
+          projectId: "practice-f6c7a",
+          storageBucket: "practice-f6c7a.appspot.com",
+          messagingSenderId: "447125498912",
+          appId: "1:447125498912:web:475163566a817477596045",
+          measurementId: "G-BYDSPVGP5G"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+  
+     let abc = ()=>{
+var email = document.getElementById("email").value
+var password = document.getElementById("pass").value
+// console.log(email + password)
+
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+    email = " "
+    password= " "
+    console.log("success")
+ 
+   
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    console.log(errorCode + errorMessage)
+  });
+
+    }
+btn.addEventListener('click',abc)
+btn1.addEventListener('click',()=>{
+
+    var email = document.getElementById("email-login").value
+var password = document.getElementById("pass-login").value
+// console.log(email + password)
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  
+    console.log("success")
+ 
+   
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    console.log(errorCode + errorMessage)
+  });
+
+})
+
+
+
+      </script>
+</body>
+</html>
